@@ -749,3 +749,5 @@ class Media(Base, metaclass=abc.ABCMeta):
         """Score statistics dict, with int scores from 1-10 as keys, and an int number of users as values.
         """
         return self._score_stats
+
+    
