@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import requests
+import time
 
 from . import anime
 from . import manga
@@ -63,7 +64,7 @@ class Session(object):
     """Class to handle requests to MAL. Handles login, setting HTTP headers, etc.
     """
 
-    def __init__(self, username=None, password=None, user_agent="iMAL-iOS", proxy_settings=None):
+    def __init__(self, username=None, password=None, user_agent="iMAL-iOS", proxy_settings=None, wait=0):
         """Creates a new instance of Session.
 
         :type username: str
@@ -98,6 +99,7 @@ class Session(object):
         Attributes which raise these exceptions will be set to None.
         """
         self.suppress_parse_exceptions = False
+        self._wait = wait
 
     def logged_in(self):
         """Checks the logged-in status of the current session.
@@ -324,3 +326,6 @@ class Session(object):
 
         """
         return user.User(self, username)
+        
+    def wait(self):
+        time.sleep(self._wait)
