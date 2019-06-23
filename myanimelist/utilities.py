@@ -150,6 +150,10 @@ def parse_profile_date(text, suppress=False):
         except ValueError:
             pass
         try:
+            return datetime.datetime.strptime(text, '%b, %Y').date()
+        except ValueError:
+            pass
+        try:
             return datetime.datetime.strptime(text, "%b %d, %Y %I:%M %p")
         except ValueError:
             pass
