@@ -291,7 +291,7 @@ class Anime(media.Media):
         try:
             temp = info_panel_first.xpath(".//div/span[text()[contains(.,'Premiered:')]]")
             anime_info['premiered'] = ''
-            if len(temp) > 0:            
+            if len(temp) > 0:
                 premiered_tag = "".join(temp[0].getparent().xpath(".//text()")).strip().replace('\n', '') \
                     .split(": ")[-1].rstrip()
                 anime_info['premiered'] = premiered_tag.strip()
@@ -415,6 +415,7 @@ class Anime(media.Media):
         :return: current media object.
 
         """
+        self.session.wait()
         videos_page = self.session.session.get(
             'https://myanimelist.net/' + self.__class__.__name__.lower() + '/' + str(
                 self.id) + '/' + utilities.urlencode(self.title) + '/video').text
