@@ -597,6 +597,7 @@ class Media(Base, metaclass=abc.ABCMeta):
         :return: current media object.
 
         """
+        self.session.wait()
         media_page = self.session.session.get(
             'https://myanimelist.net/' + self.__class__.__name__.lower() + '/' + str(self.id)).text
         self.set(self.parse(utilities.get_clean_dom(media_page)))
@@ -609,6 +610,7 @@ class Media(Base, metaclass=abc.ABCMeta):
         :return: current media object.
 
         """
+        self.session.wait()
         stats_page = self.session.session.get('https://myanimelist.net/' + self.__class__.__name__.lower() + '/' + str(
             self.id) + '/' + utilities.urlencode(self.title) + '/stats').text
         self.set(self.parse_stats(utilities.get_clean_dom(stats_page)))
@@ -621,6 +623,7 @@ class Media(Base, metaclass=abc.ABCMeta):
         :return: current media object.
 
         """
+        self.session.wait()
         characters_page = self.session.session.get(
             'https://myanimelist.net/' + self.__class__.__name__.lower() + '/' + str(
                 self.id) + '/' + utilities.urlencode(self.title).replace('/', '_') + '/characters').text
@@ -746,4 +749,3 @@ class Media(Base, metaclass=abc.ABCMeta):
         """Score statistics dict, with int scores from 1-10 as keys, and an int number of users as values.
         """
         return self._score_stats
-
