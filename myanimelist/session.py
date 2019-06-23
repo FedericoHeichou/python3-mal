@@ -329,3 +329,4 @@ class Session(object):
         
     def wait(self):
         time.sleep(self._wait)
+        
